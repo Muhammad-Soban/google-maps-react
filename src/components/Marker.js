@@ -2,6 +2,7 @@ import React, {Fragment} from 'react'
 import PropTypes from 'prop-types'
 
 import { camelize } from '../lib/String'
+import { areObjectsEqual } from '../lib/areObjectsEqual';
 
 const evtNames = [
   'click',
@@ -36,7 +37,7 @@ export class Marker extends React.Component {
 
   componentDidUpdate(prevProps) {
     if ((this.props.map !== prevProps.map) ||
-      (this.props.position !== prevProps.position) ||
+      (!areObjectsEqual(this.props.position, prevProps.position)) ||
       (this.props.icon !== prevProps.icon)) {
         if (this.marker) {
             this.marker.setMap(null);
